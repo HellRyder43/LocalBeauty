@@ -22,10 +22,10 @@ class Menu extends StatefulWidget {
 
 class _MenuState extends State<Menu> {
   final List<CardDetail> cards = [
-    CardDetail(title: 'Name', subtitle: 'Description'),
-    CardDetail(title: 'Name', subtitle: 'Description'),
-    CardDetail(title: 'Name', subtitle: 'Description'),
-    CardDetail(title: 'Name', subtitle: 'Description'),
+    CardDetail(title: 'Name', subtitle: 'Description', imagePath: "Auni.jpeg"),
+    CardDetail(title: 'Name', subtitle: 'Description', imagePath: "Auni.jpeg"),
+    CardDetail(title: 'Name', subtitle: 'Description', imagePath: "Auni.jpeg"),
+    CardDetail(title: 'Name', subtitle: 'Description', imagePath: "Auni.jpeg"),
   ];
 
   @override
@@ -83,6 +83,7 @@ class _MenuState extends State<Menu> {
               itemBuilder: (context, index) => CardListTile(
                 title: cards[index].title,
                 subtitle: cards[index].subtitle,
+                imagePath: cards[index].imagePath,
               ),
             ),
           ),

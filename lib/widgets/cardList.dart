@@ -4,8 +4,9 @@ import 'package:local_beauty/bookingForm.dart';
 class CardListTile extends StatelessWidget {
   final String title;
   final String subtitle;
+  final String imagePath;
 
-  CardListTile({this.title, this.subtitle});
+  CardListTile({this.title, this.subtitle, this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class CardListTile extends StatelessWidget {
             ),
           ),
           child: CircleAvatar(
-            backgroundImage: AssetImage("assets/Auni.jpeg"),
+            backgroundImage: AssetImage("assets/$imagePath"),
             radius: 30,
           ),
         ),
