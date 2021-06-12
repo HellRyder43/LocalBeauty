@@ -31,9 +31,7 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Navbar(
-        userData: widget.userData,
-      ),
+      drawer: Navbar(),
       appBar: CustomAppBar("Main Menu"),
       body: Column(
         children: [

@@ -7,10 +7,6 @@ import 'package:local_beauty/profile.dart';
 import 'package:local_beauty/user_repository.dart';
 
 class Navbar extends StatefulWidget {
-  final LoggedInUser userData;
-
-  Navbar({this.userData});
-
   @override
   _NavbarState createState() => _NavbarState();
 }
@@ -24,7 +20,7 @@ class _NavbarState extends State<Navbar> {
         children: [
           UserAccountsDrawerHeader(
             accountName: Text(
-              widget.userData.loggedInUser.username,
+              "Auni",
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -32,7 +28,7 @@ class _NavbarState extends State<Navbar> {
               ),
             ),
             accountEmail: Text(
-              widget.userData.loggedInUser.email,
+              "auni@gmail.com",
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
