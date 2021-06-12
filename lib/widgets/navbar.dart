@@ -4,8 +4,18 @@ import 'package:local_beauty/customerBookings.dart';
 import 'package:local_beauty/main.dart';
 import 'package:local_beauty/menu.dart';
 import 'package:local_beauty/profile.dart';
+import 'package:local_beauty/user_repository.dart';
 
-class Navbar extends StatelessWidget {
+class Navbar extends StatefulWidget {
+  final LoggedInUser userData;
+
+  Navbar({this.userData});
+
+  @override
+  _NavbarState createState() => _NavbarState();
+}
+
+class _NavbarState extends State<Navbar> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -14,7 +24,7 @@ class Navbar extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
             accountName: Text(
-              "Auni Dalilah",
+              widget.userData.loggedInUser.username,
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -22,7 +32,7 @@ class Navbar extends StatelessWidget {
               ),
             ),
             accountEmail: Text(
-              "aunidalilah.mz@gmail.com",
+              widget.userData.loggedInUser.email,
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,

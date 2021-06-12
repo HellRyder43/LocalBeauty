@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:local_beauty/models/cardDetail.dart';
+import 'package:local_beauty/models/user.dart';
 import 'package:local_beauty/styles.dart';
+import 'package:local_beauty/user_repository.dart';
 import 'package:local_beauty/widgets/appBar.dart';
 import 'package:local_beauty/widgets/cardList.dart';
 import 'package:local_beauty/widgets/navbar.dart';
@@ -9,8 +11,10 @@ import 'package:local_beauty/widgets/navbar.dart';
 class Menu extends StatefulWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
+  final LoggedInUser userData;
 
-  const Menu({Key key, this.controller, this.focusNode}) : super(key: key);
+  const Menu({Key key, this.controller, this.focusNode, this.userData})
+      : super(key: key);
 
   @override
   _MenuState createState() => _MenuState();
@@ -27,7 +31,9 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Navbar(),
+      drawer: Navbar(
+        userData: widget.userData,
+      ),
       appBar: CustomAppBar("Main Menu"),
       body: Column(
         children: [

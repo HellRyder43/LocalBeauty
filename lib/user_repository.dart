@@ -14,3 +14,7 @@ class UserRepository {
         userTypeInit: "Admin")
   ];
 }
+
+class LoggedInUser {
+  User loggedInUser = new User();
+}

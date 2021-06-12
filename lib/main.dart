@@ -1,14 +1,28 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:local_beauty/bookingForm.dart';
+import 'package:local_beauty/bookingList.dart';
+import 'package:local_beauty/customerBookings.dart';
 import 'package:local_beauty/login.dart';
+import 'package:local_beauty/menu.dart';
+import 'package:local_beauty/profile.dart';
 import 'package:local_beauty/signup.dart';
 
 void main() {
   runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: HomePage(),
-  ));
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+      routes: <String, WidgetBuilder>{
+        "/Menu": (BuildContext context) => new Menu(),
+        "/Login": (BuildContext context) => new LoginPage(),
+        "/SignUp": (BuildContext context) => new SignUpPage(),
+        "/Profile": (BuildContext context) => new Profile(),
+        "/Home": (BuildContext context) => new HomePage(),
+        "/BookingForm": (BuildContext context) => new BookingForm(),
+        "/BookingList": (BuildContext context) => new BookingList(),
+        "/CustomerBooking": (BuildContext context) => new CustomerBooking(),
+      }));
 }
 
 class HomePage extends StatelessWidget {

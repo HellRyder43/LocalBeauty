@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:local_beauty/menu.dart';
-import 'package:local_beauty/models/user.dart';
 import 'package:local_beauty/signup.dart';
 import 'package:local_beauty/user_repository.dart';
-import 'package:local_beauty/widgets/inputFile.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 UserRepository userList = new UserRepository();
+LoggedInUser userLoggedIn = new LoggedInUser();
 
 class LoginPage extends StatefulWidget {
   @override
@@ -27,8 +26,17 @@ class _LoginPageState extends State<LoginPage> {
       for (int i = 0; i < userList.allUsers.length; i++) {
         if (email == userList.allUsers[i].email &&
             password == userList.allUsers[i].password) {
+          userLoggedIn.loggedInUser.username = userList.allUsers[i].username;
+          userLoggedIn.loggedInUser.email = userList.allUsers[i].email;
+          userLoggedIn.loggedInUser.password = userList.allUsers[i].password;
+          userLoggedIn.loggedInUser.userType = userList.allUsers[i].userType;
+
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Menu()));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Menu(
+                        userData: userLoggedIn,
+                      )));
           break;
         } else {
           print("User does not exists");
