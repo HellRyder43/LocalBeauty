@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:local_beauty/bookingList.dart';
+import 'package:local_beauty/customerBookings.dart';
+import 'package:local_beauty/main.dart';
+import 'package:local_beauty/menu.dart';
+import 'package:local_beauty/profile.dart';
 
 class Navbar extends StatelessWidget {
   @override
@@ -47,17 +52,34 @@ class Navbar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.dashboard),
             title: Text("Main Menu"),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Menu()));
+            },
           ),
           ListTile(
             leading: Icon(Icons.people),
             title: Text("Profile"),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Profile()));
+            },
           ),
           ListTile(
-            leading: Icon(Icons.calendar_view_day),
+            leading: Icon(Icons.calendar_today),
             title: Text("My Bookings"),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CustomerBooking()));
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.list_alt),
+            title: Text("Booking List"),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => BookingList()));
+            },
           ),
           Divider(),
           ListTile(
@@ -68,7 +90,10 @@ class Navbar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.logout),
             title: Text("Logout"),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
+            },
           ),
         ],
       ),

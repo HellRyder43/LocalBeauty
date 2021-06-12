@@ -13,7 +13,7 @@ Widget inputFile({label, obscureText = false}) {
       SizedBox(
         height: 5,
       ),
-      TextField(
+      TextFormField(
         obscureText: obscureText,
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
