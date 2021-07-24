@@ -17,12 +17,16 @@ class UserRepository {
         passwordInit: "123456",
         emailInit: "auni@gmail.com",
         userTypeInit: "Customer",
+        mobileNoInit: "0129786577",
+        locationInit: "Kajang",
         imageInit: "auni.jpeg"),
     User(
         usernameInit: "Amir",
         passwordInit: "123456",
         emailInit: "amir@gmail.com",
         userTypeInit: "Admin",
+        mobileNoInit: "0102651179",
+        locationInit: "Kajang",
         imageInit: "amir.jpeg"),
     User(
         usernameInit: "Aida",
@@ -30,7 +34,7 @@ class UserRepository {
         emailInit: "aida@gmail.com",
         userTypeInit: "Mua",
         locationInit: "Kajang",
-        mobileNoInit: "0112340293",
+        mobileNoInit: "0134782935",
         imageInit: "Aida.jpeg"),
     User(
         usernameInit: "Anis",
@@ -38,7 +42,7 @@ class UserRepository {
         emailInit: "anis@gmail.com",
         userTypeInit: "Mua",
         locationInit: "Ampang",
-        mobileNoInit: "0123924232",
+        mobileNoInit: "0145937293",
         imageInit: "Anis.jpeg"),
     User(
         usernameInit: "Mia Muna",
@@ -46,7 +50,7 @@ class UserRepository {
         emailInit: "mia@gmail.com",
         userTypeInit: "Mua",
         locationInit: "Gombak",
-        mobileNoInit: "0112340293",
+        mobileNoInit: "0197294723",
         imageInit: "mia.jpeg"),
     User(
         usernameInit: "Sakinah",
@@ -54,7 +58,7 @@ class UserRepository {
         emailInit: "sakinah@gmail.com",
         userTypeInit: "Mua",
         locationInit: "Cheras",
-        mobileNoInit: "0112340293",
+        mobileNoInit: "0178237923",
         imageInit: "sakinah.jpeg"),
   ];
 
@@ -82,6 +86,8 @@ class UserRepository {
     signedIn.email = data.email;
     signedIn.userType = data.userType;
     signedIn.image = data.image;
+    signedIn.mobileNo = data.mobileNo;
+    signedIn.location = data.location;
   }
 
   User getLoginUser() {

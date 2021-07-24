@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:local_beauty/models/user.dart';
+import 'package:local_beauty/user_repository.dart';
 import 'package:local_beauty/widgets/appBar.dart';
 import 'package:local_beauty/widgets/navbar.dart';
+
+UserRepository userList = new UserRepository();
 
 class Profile extends StatefulWidget {
   @override
@@ -8,6 +12,8 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  User loginUser = userList.getLoginUser();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,17 +25,22 @@ class _ProfileState extends State<Profile> {
           children: [
             CircleAvatar(
               radius: 100,
-              child: Image.asset(
-                "assets/noProfile.jpg",
-                fit: BoxFit.cover,
-              ),
+              backgroundImage: AssetImage("assets/" + loginUser.image),
             ),
             SizedBox(
               height: 20,
             ),
             TextField(
               decoration: InputDecoration(
-                  border: OutlineInputBorder(), hintText: 'Name'),
+                  border: OutlineInputBorder(), labelText: loginUser.username),
+              //controller: emailTextEditingCtrl,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextField(
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(), labelText: loginUser.location),
               //controller: emailTextEditingCtrl,
             ),
             SizedBox(
@@ -37,23 +48,18 @@ class _ProfileState extends State<Profile> {
             ),
             TextField(
               decoration: InputDecoration(
-                  border: OutlineInputBorder(), hintText: 'Location'),
+                  border: OutlineInputBorder(), labelText: loginUser.mobileNo),
               //controller: passwordTextEditingCtrl,
+            ),
+            SizedBox(
+              height: 8,
             ),
             SizedBox(
               height: 8,
             ),
             TextField(
               decoration: InputDecoration(
-                  border: OutlineInputBorder(), hintText: 'Phone No.'),
-              //controller: passwordTextEditingCtrl,
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(), hintText: 'Email'),
+                  border: OutlineInputBorder(), labelText: loginUser.email),
               //controller: passwordTextEditingCtrl,
             ),
             SizedBox(
