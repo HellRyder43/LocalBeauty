@@ -164,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                               validator: MultiValidator([
                                 RequiredValidator(errorText: "Required"),
                                 MinLengthValidator(6,
-                                    errorText: "Atleast 6 characters"),
+                                    errorText: "At least 6 characters"),
                               ]),
                               onSaved: (String value) {
                                 password = value;

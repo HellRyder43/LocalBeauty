@@ -8,25 +8,81 @@ import 'package:local_beauty/widgets/appBar.dart';
 import 'package:local_beauty/widgets/cardList.dart';
 import 'package:local_beauty/widgets/navbar.dart';
 
+UserRepository userList = new UserRepository();
+
 class Menu extends StatefulWidget {
-  final TextEditingController controller;
-  final FocusNode focusNode;
   final LoggedInUser userData;
 
-  const Menu({Key key, this.controller, this.focusNode, this.userData})
-      : super(key: key);
+  const Menu({Key key, this.userData}) : super(key: key);
 
   @override
   _MenuState createState() => _MenuState();
 }
 
 class _MenuState extends State<Menu> {
-  final List<CardDetail> cards = [
-    CardDetail(title: 'Name', subtitle: 'Description', imagePath: "Auni.jpeg"),
-    CardDetail(title: 'Name', subtitle: 'Description', imagePath: "Auni.jpeg"),
-    CardDetail(title: 'Name', subtitle: 'Description', imagePath: "Auni.jpeg"),
-    CardDetail(title: 'Name', subtitle: 'Description', imagePath: "Auni.jpeg"),
-  ];
+  TextEditingController controller = TextEditingController();
+  FocusNode focusNode;
+
+  final List<User> muaUsers = userList.getMua();
+  List<CardDetail> muaCards;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    muaCards = [
+      CardDetail(
+          title: muaUsers[0].username,
+          subtitle: muaUsers[0].location,
+          imagePath: "sada.jpeg"),
+      CardDetail(
+          title: muaUsers[1].username,
+          subtitle: muaUsers[1].location,
+          imagePath: "uwais.jpg")
+    ];
+
+    super.initState();
+  }
+
+  clearTextInput() {
+    controller.clear();
+    filterSearchResults("");
+  }
+
+  void fillInMuaCards() {
+    for (int i = 0; i < muaUsers.length; i++) {
+      muaCards.add(
+        CardDetail(
+            title: muaUsers[i].username,
+            subtitle: muaUsers[i].location,
+            imagePath: muaUsers[i].image),
+      );
+    }
+  }
+
+  void filterSearchResults(String query) {
+    List<CardDetail> searchList = [];
+    searchList.addAll(muaCards);
+    print(searchList.length.toString() + "  asdadasd");
+    if (query.isNotEmpty) {
+      List<CardDetail> listData = [];
+      searchList.forEach((element) {
+        if (element.subtitle.toLowerCase() == query.toLowerCase()) {
+          print("Found data " + element.subtitle);
+          listData.add(element);
+          print("In List data " + listData[0].title);
+          setState(() {
+            muaCards.clear();
+            muaCards.addAll(listData);
+          });
+        }
+      });
+    } else {
+      setState(() {
+        muaCards.clear();
+        fillInMuaCards();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,15 +111,18 @@ class _MenuState extends State<Menu> {
                     ),
                     Expanded(
                       child: CupertinoTextField(
-                        controller: widget.controller,
-                        focusNode: widget.focusNode,
+                        onChanged: (value) {
+                          filterSearchResults(value);
+                        },
+                        controller: controller,
+                        focusNode: focusNode,
                         style: Styles.searchText,
                         cursorColor: Styles.searchCursorColor,
                         decoration: null,
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: clearTextInput,
                       child: const Icon(
                         CupertinoIcons.clear_thick_circled,
                         color: Styles.searchIconColor,
@@ -77,11 +136,11 @@ class _MenuState extends State<Menu> {
           Expanded(
             flex: 5,
             child: ListView.builder(
-              itemCount: cards.length,
+              itemCount: muaCards.length,
               itemBuilder: (context, index) => CardListTile(
-                title: cards[index].title,
-                subtitle: cards[index].subtitle,
-                imagePath: cards[index].imagePath,
+                title: muaCards[index].title,
+                subtitle: muaCards[index].subtitle,
+                imagePath: muaCards[index].imagePath,
               ),
             ),
           ),

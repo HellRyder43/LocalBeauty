@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:local_beauty/login.dart';
 import 'package:local_beauty/widgets/inputFile.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
+  @override
+  _SignUpPageState createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  bool isMua = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +23,7 @@ class SignUpPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 40),
-          height: MediaQuery.of(context).size.height - 50,
+          height: MediaQuery.of(context).size.height - 80,
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -45,6 +52,22 @@ class SignUpPage extends StatelessWidget {
                   inputFile(label: "Email"),
                   inputFile(label: "Password", obscureText: true),
                   inputFile(label: "Confirm Password ", obscureText: true),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Register as Mua",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      Checkbox(
+                          value: isMua,
+                          onChanged: (value) {
+                            setState(() {
+                              isMua = value;
+                            });
+                          }),
+                    ],
+                  )
                 ],
               ),
               Container(
