@@ -1,11 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:local_beauty/menu.dart';
+import 'package:local_beauty/models/user.dart';
 import 'package:local_beauty/signup.dart';
 import 'package:local_beauty/user_repository.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 UserRepository userList = new UserRepository();
-LoggedInUser userLoggedIn = new LoggedInUser();
 
 class LoginPage extends StatefulWidget {
   @override
@@ -18,30 +19,44 @@ class _LoginPageState extends State<LoginPage> {
   String email = "";
   String password = "";
 
+  //User loginData = new User();
+
   void validate() {
     if (formKey.currentState.validate()) {
       print("Validated");
+      print("List Users " + userList.allUsers.length.toString());
       formKey.currentState.save();
 
-      for (int i = 0; i < userList.allUsers.length; i++) {
-        if (email == userList.allUsers[i].email &&
-            password == userList.allUsers[i].password) {
-          userLoggedIn.loggedInUser.username = userList.allUsers[i].username;
-          userLoggedIn.loggedInUser.email = userList.allUsers[i].email;
-          userLoggedIn.loggedInUser.password = userList.allUsers[i].password;
-          userLoggedIn.loggedInUser.userType = userList.allUsers[i].userType;
+      User userLogIn = userList.getSingleUser(email, password);
 
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Menu(
-                        userData: userLoggedIn,
-                      )));
-          break;
-        } else {
-          print("User does not exists");
-        }
+      if (userLogIn != null) {
+        print("Found User : " + userLogIn.username);
+        userList.setLoginUser(userLogIn);
+
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Menu()));
+      } else {
+        print("User does not exists");
       }
+
+      // for (int i = 0; i < userList.allUsers.length; i++) {
+      //   print("Loop " + i.toString());
+      //   if (email == userList.allUsers[i].email &&
+      //       password == userList.allUsers[i].password) {
+      //     loginData.username = userList.allUsers[i].username;
+      //     loginData.email = userList.allUsers[i].email;
+      //     loginData.userType = userList.allUsers[i].userType;
+      //     loginData.image = userList.allUsers[i].image;
+      //
+      //     userList.setLoginUser(loginData);
+      //
+      //     Navigator.push(
+      //         context, MaterialPageRoute(builder: (context) => Menu()));
+      //     break;
+      //   } else {
+      //     print("User does not exists");
+      //   }
+      // }
     } else {
       print("Not valid");
     }
@@ -184,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                       minWidth: double.infinity,
                       height: 60,
                       onPressed: validate,
-                      color: Color(0xff0095FF),
+                      color: Colors.pinkAccent,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),

@@ -63,7 +63,7 @@ class _ProfileState extends State<Profile> {
               minWidth: double.infinity,
               height: 60,
               onPressed: () {},
-              color: Color(0xff0095FF),
+              color: Colors.pinkAccent,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50)),
               child: Text(

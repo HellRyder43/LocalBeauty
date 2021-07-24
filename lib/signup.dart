@@ -75,7 +75,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   minWidth: double.infinity,
                   height: 60,
                   onPressed: () {},
-                  color: Color(0xff0095FF),
+                  color: Colors.pinkAccent,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),

@@ -11,10 +11,6 @@ import 'package:local_beauty/widgets/navbar.dart';
 UserRepository userList = new UserRepository();
 
 class Menu extends StatefulWidget {
-  final LoggedInUser userData;
-
-  const Menu({Key key, this.userData}) : super(key: key);
-
   @override
   _MenuState createState() => _MenuState();
 }
@@ -23,22 +19,29 @@ class _MenuState extends State<Menu> {
   TextEditingController controller = TextEditingController();
   FocusNode focusNode;
 
-  final List<User> muaUsers = userList.getMua();
-  List<CardDetail> muaCards;
+  List<User> muaUsers = userList.getAllMua().toList();
+  List<CardDetail> muaCards = [];
 
   @override
   void initState() {
     // TODO: implement initState
-    muaCards = [
-      CardDetail(
-          title: muaUsers[0].username,
-          subtitle: muaUsers[0].location,
-          imagePath: "sada.jpeg"),
-      CardDetail(
-          title: muaUsers[1].username,
-          subtitle: muaUsers[1].location,
-          imagePath: "uwais.jpg")
-    ];
+    // muaCards = [
+    //   CardDetail(
+    //       title: muaUsers[0].username,
+    //       subtitle: muaUsers[0].location,
+    //       imagePath: muaUsers[0].image),
+    //   CardDetail(
+    //       title: muaUsers[1].username,
+    //       subtitle: muaUsers[1].location,
+    //       imagePath: muaUsers[1].image)
+    // ];
+
+    for (int i = 0; i < muaUsers.length; i++) {
+      muaCards.add(CardDetail(
+          title: muaUsers[i].username,
+          subtitle: muaUsers[i].location,
+          imagePath: muaUsers[i].image));
+    }
 
     super.initState();
   }

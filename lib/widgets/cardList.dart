@@ -16,7 +16,7 @@ class CardListTile extends StatelessWidget {
           Radius.circular(5),
         ),
       ),
-      color: Colors.blueAccent,
+      color: Colors.pinkAccent,
       elevation: 8.0,
       margin: new EdgeInsets.symmetric(
         horizontal: 10.0,
@@ -63,8 +63,12 @@ class CardListTile extends StatelessWidget {
         ),
         trailing: IconButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => BookingForm()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => BookingForm(
+                          muaName: title,
+                        )));
           },
           icon: Icon(Icons.keyboard_arrow_right),
           color: Colors.white,
@@ -83,8 +87,11 @@ class CardBooking extends StatelessWidget {
   final String bookDate;
   final String event;
   final String price;
+  final String address;
+  final String time;
+  final String mobileNo;
 
-  CardBooking({this.name, this.bookDate, this.event, this.price});
+  CardBooking({this.name, this.bookDate, this.event, this.price, this.address, this.time, this.mobileNo});
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +110,7 @@ class CardBooking extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Text("No 43a, Jalan Cerdik 3, Taman Universiti"),
+              Text(address),
               SizedBox(
                 height: 20,
               ),
@@ -114,7 +121,7 @@ class CardBooking extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Text("12:00 PM"),
+              Text(time),
               SizedBox(
                 height: 20,
               ),
@@ -125,7 +132,7 @@ class CardBooking extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Text("0129786577"),
+              Text(mobileNo),
             ],
           ),
           actions: <Widget>[
@@ -144,7 +151,7 @@ class CardBooking extends StatelessWidget {
             Radius.circular(5),
           ),
         ),
-        color: Colors.blueAccent,
+        color: Colors.pinkAccent,
         elevation: 8.0,
         margin: new EdgeInsets.symmetric(
           horizontal: 10.0,

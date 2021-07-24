@@ -19,6 +19,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
     return AppBar(
       title: Text(widget.title),
       centerTitle: true,
+      backgroundColor: Colors.pinkAccent,
     );
   }
 }

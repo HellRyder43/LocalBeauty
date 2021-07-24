@@ -3,8 +3,13 @@ import 'package:local_beauty/bookingList.dart';
 import 'package:local_beauty/customerBookings.dart';
 import 'package:local_beauty/main.dart';
 import 'package:local_beauty/menu.dart';
+import 'package:local_beauty/models/user.dart';
 import 'package:local_beauty/profile.dart';
 import 'package:local_beauty/user_repository.dart';
+
+import '../paymentList.dart';
+
+UserRepository userList = new UserRepository();
 
 class Navbar extends StatefulWidget {
   @override
@@ -12,6 +17,15 @@ class Navbar extends StatefulWidget {
 }
 
 class _NavbarState extends State<Navbar> {
+  User signedIn = new User();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    signedIn = userList.getLoginUser();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -20,7 +34,7 @@ class _NavbarState extends State<Navbar> {
         children: [
           UserAccountsDrawerHeader(
             accountName: Text(
-              "Auni",
+              signedIn.username,
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -28,7 +42,7 @@ class _NavbarState extends State<Navbar> {
               ),
             ),
             accountEmail: Text(
-              "auni@gmail.com",
+              signedIn.email,
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -38,7 +52,7 @@ class _NavbarState extends State<Navbar> {
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.asset(
-                  "assets/Auni.jpeg",
+                  "assets/" + signedIn.image,
                   width: 90,
                   height: 90,
                   fit: BoxFit.cover,
@@ -71,28 +85,50 @@ class _NavbarState extends State<Navbar> {
                   context, MaterialPageRoute(builder: (context) => Profile()));
             },
           ),
-          ListTile(
-            leading: Icon(Icons.calendar_today),
-            title: Text("My Bookings"),
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CustomerBooking()));
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.list_alt),
-            title: Text("Booking List"),
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => BookingList()));
-            },
-          ),
+          signedIn.userType == "Mua"
+              ? SizedBox.shrink()
+              : signedIn.userType == "Admin"
+                  ? SizedBox.shrink()
+                  : ListTile(
+                      leading: Icon(Icons.calendar_today),
+                      title: Text("My Bookings"),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CustomerBooking()));
+                      },
+                    ),
+          signedIn.userType == "Customer"
+              ? SizedBox.shrink()
+              : signedIn.userType == "Admin"
+                  ? SizedBox.shrink()
+                  : ListTile(
+                      leading: Icon(Icons.list_alt),
+                      title: Text("Booking List"),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BookingList()));
+                      },
+                    ),
+          signedIn.userType == "Admin"
+              ? ListTile(
+                  leading: Icon(Icons.payment),
+                  title: Text("Booking Record"),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => PaymentList()));
+                  },
+                )
+              : SizedBox.shrink(),
           Divider(),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text("Settings"),
-            onTap: () {},
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.settings),
+          //   title: Text("Settings"),
+          //   onTap: () {},
+          // ),
           ListTile(
             leading: Icon(Icons.logout),
             title: Text("Logout"),

@@ -6,6 +6,8 @@ import 'package:local_beauty/bookingList.dart';
 import 'package:local_beauty/customerBookings.dart';
 import 'package:local_beauty/login.dart';
 import 'package:local_beauty/menu.dart';
+import 'package:local_beauty/payment.dart';
+import 'package:local_beauty/paymentList.dart';
 import 'package:local_beauty/profile.dart';
 import 'package:local_beauty/signup.dart';
 
@@ -22,6 +24,8 @@ void main() {
         "/BookingForm": (BuildContext context) => new BookingForm(),
         "/BookingList": (BuildContext context) => new BookingList(),
         "/CustomerBooking": (BuildContext context) => new CustomerBooking(),
+        "/Payment": (BuildContext context) => new Payment(),
+        "/PaymentList": (BuildContext context) => new PaymentList(),
       }));
 }
 
@@ -32,6 +36,7 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
+            color: Colors.white,
             width: double.infinity,
             height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
@@ -44,22 +49,11 @@ class HomePage extends StatelessWidget {
                       "Welcome",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 30,
+                        fontSize: 45,
                       ),
                     ),
                     SizedBox(
                       height: 20,
-                    ),
-                    Text(
-                      "Local Beauty",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.grey[700],
-                        fontSize: 15,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 40,
                     ),
                   ],
                 ),
@@ -67,7 +61,7 @@ class HomePage extends StatelessWidget {
                   height: MediaQuery.of(context).size.height / 3,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage("assets/welcome.png"))),
+                          image: AssetImage("assets/logo.jpeg"))),
                 ),
                 SizedBox(
                   height: 100,
@@ -102,7 +96,7 @@ class HomePage extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => SignUpPage()));
                       },
-                      color: Color(0xff0095FF),
+                      color: Colors.pinkAccent,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                       child: Text(
